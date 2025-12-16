@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arunachal Market</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home">
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">🛍️ Arunachal Market</div>
+        <div class="search-wrapper">
+          <input type="text" placeholder="Search for products..." />
+        </div>
+        <div class="header-actions">
+          <button onclick="redirectToLogin()">👤 Login</button>
+          <button onclick="window.location.href='cart.html'">
+            🛒 Cart
+            <span
+              class="cart-badge"
+              style="
+                display: none;
+                background: red;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 50%;
+                font-size: 10px;
+                margin-left: 2px;
+              "
+              >0</span
+            >
+          </button>
+          <button>❤️ Wishlist</button>
+        </div>
+      </div>
+      <nav class="nav-bar">
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="clothing.html">Clothing</a>
+          <a href="edibles.html">Edibles & Groceries</a>
+          <a href="#">Electronics</a>
+          <a href="#">Home & Furniture</a>
+          <a href="#">Sports & Outdoors</a>
+          <a href="#">Help & Support</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>🎉 Welcome to Arunachal Market</h1>
+        <p>
+          Discover Amazing Deals on Local Clothing & Organic Groceries from
+          Arunachal
+        </p>
+        <p>at Your Door Step</p>
+        <button
+          class="hero-btn"
+          onclick="document.querySelector('.categories').scrollIntoView({behavior: 'smooth'})"
+        >
+          Shop Now
+        </button>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="container">
+      <section>
+        <h2>Shop by Category</h2>
+        <div class="categories">
+          <a href="clothing.html" class="category-card">
+            <div class="category-icon">👕</div>
+            <div class="category-name">Local Cloth</div>
+          </a>
+          <a href="edibles.html" class="category-card">
+            <div class="category-icon">🥗</div>
+            <div class="category-name">Organic Products</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- CLOTHING DEALS -->
+      <section>
+        <h2>👕 Featured Clothing</h2>
+        <div class="product-grid" id="clothing-grid"></div>
+      </section>
+
+      <!-- EDIBLES DEALS -->
+      <section>
+        <h2>🥗 Organic Products</h2>
+        <div class="product-grid" id="edibles-grid"></div>
+      </section>
+
+      <!-- PROMOTIONAL SECTION -->
+      <section
+        style="
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          text-align: center;
+        "
+      >
+        <h2 style="border-color: white; color: white">💳 Special Offers</h2>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              padding: 20px;
+              border-radius: 4px;
+            "
+          >
+            <h3>Free Shipping</h3>
+            <p>On orders above ₹500</p>
+          </div>
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              padding: 20px;
+              border-radius: 4px;
+            "
+          >
+            <h3>Easy Returns</h3>
+            <p>30 days money-back guarantee</p>
+          </div>
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              padding: 20px;
+              border-radius: 4px;
+            "
+          >
+            <h3>Secure Payment</h3>
+            <p>100% secure transactions</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About ShopHub</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Return Policy</a>
+        </div>
+        <div class="footer-section">
+          <h4>Policies</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Security</a>
+          <a href="#">Cookies</a>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ShopHub. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

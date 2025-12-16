@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="remove-sentence">Hey i am parent</div>
+    <button class="remove">remove : click me first then go to toggle</button>
+    <button class="toggle">toggle</button>
+  </body>
+
+  <script>
+    let removeParent = document.querySelector(".remove-sentence");
+    let removeBtn = document.querySelector(".remove");
+    removeBtn.addEventListener("click", () => {
+      removeParent.classList.remove("remove-sentence");
+      console.log("remove-sentence class is removed");
+    });
+    let toggleBtn = document.querySelector(".toggle");
+    toggleBtn.addEventListener("click", () => {
+      removeParent.classList.toggle("new-class-name");
+      let el = document.createElement("div");
+      removeParent.appendChild(el);
+      el.innerHTML = "new-class added by toggle";
+      console.log(removeParent.classList.contains("remove-sentence"));
+    });
+  </script>
+</html>

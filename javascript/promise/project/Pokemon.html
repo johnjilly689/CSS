@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS styles are now embedded inside this <style> tag -->
+    <style>
+      /* --- Basic Setup --- */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        margin: 0;
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: #3b528f;
+        margin-bottom: 2rem;
+      }
+
+      /* --- The Grid Container --- */
+      .pokedex-grid {
+        display: grid;
+        /* This creates a responsive grid:
+               - It will try to fit as many 200px cards as it can
+               - Each card will be at least 200px, but can grow to fill space (1fr)
+            */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* --- Individual Card Styling --- */
+      .pokemon-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden; /* To keep the image background contained */
+      }
+
+      .pokemon-card:hover {
+        transform: translateY(-5px); /* Lifts the card on hover */
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .pokemon-image-container {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .pokemon-image-container img {
+        width: 120px;
+        height: 120px;
+        image-rendering: pixelated; /* Makes the pixel art sharp */
+      }
+
+      .pokemon-info {
+        padding: 1rem;
+      }
+
+      .pokemon-id {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #999;
+      }
+
+      .pokemon-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0.25rem 0 0.5rem 0;
+        text-transform: capitalize; /* Makes "bulbasaur" -> "Bulbasaur" */
+      }
+
+      .pokemon-types {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .type {
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        color: #fff;
+        text-transform: capitalize;
+      }
+
+      /* --- Pokémon Type Colors (from Bulbagarden) --- */
+      .type-normal {
+        background-color: #a8a77a;
+      }
+      .type-fire {
+        background-color: #ee8130;
+      }
+      .type-water {
+        background-color: #6390f0;
+      }
+      .type-electric {
+        background-color: #f7d02c;
+      }
+      .type-grass {
+        background-color: #7ac74c;
+      }
+      .type-ice {
+        background-color: #96d9d6;
+      }
+      .type-fighting {
+        background-color: #c22e28;
+      }
+      .type-poison {
+        background-color: #a33ea1;
+      }
+      .type-ground {
+        background-color: #e2bf65;
+      }
+      .type-flying {
+        background-color: #a98ff3;
+      }
+      .type-psychic {
+        background-color: #f95587;
+      }
+      .type-bug {
+        background-color: #a6b91a;
+      }
+      .type-rock {
+        background-color: #b6a136;
+      }
+      .type-ghost {
+        background-color: #735797;
+      }
+      .type-dragon {
+        background-color: #6f35fc;
+      }
+      .type-dark {
+        background-color: #705746;
+      }
+      .type-steel {
+        background-color: #b7b7ce;
+      }
+      .type-fairy {
+        background-color: #d685ad;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Pokédex</h1>
+
+    <!-- Your JavaScript will create all the cards and put them inside this grid container -->
+    <main id="pokedex-grid" class="pokedex-grid">
+      <!-- 
+        Example of what your JS will create:
+        <article class="pokemon-card">
+            <div class="pokemon-image-container">
+                <img src="httpsT://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Bulbasaur">
+            </div>
+            <div class="pokemon-info">
+                <span class="pokemon-id">#1</span>
+                <h3 class="pokemon-name">Bulbasaur</h3>
+                <div class="pokemon-types">
+                    <span class="type type-grass">grass</span>
+                    <span class="type type-poison">poison</span>
+                </div>
+            </div>
+        </article> 
+        -->
+    </main>
+
+    <!-- Link your script.js file here when you're ready -->
+    <!-- <script src="script.js"></script> -->
+  </body>
+
+  <script>
+    // --- STEP 1: Get a reference to your main grid container ---
+    // This is where we will add all the Pokémon cards.
+    const pokedexGrid = document.getElementById("pokedex-grid");
+
+    // We'll set a loading message while we fetch the data
+    pokedexGrid.innerHTML =
+      '<p style="text-align: center; width: 100%;">Loading Pokémon...</p>';
+
+    // --- STEP 2: Define the main function to fetch the Pokémon list ---
+    // We make this an 'async' function so we can use 'await'.
+    async function fetchPokemonList() {
+      try {
+        // First, we fetch the main list of 20 Pokémon.
+        const listResponse = await fetch("https://pokeapi.co/api/v2/pokemon/");
+
+        if (!listResponse.ok) {
+          throw new Error(`HTTP error! status: ${listResponse.status}`);
+        }
+
+        const listData = await listResponse.json();
+        const pokemonList = listData.results; // This is an array of { name, url }
+
+        // --- STEP 3: Fetch ALL Pokémon details in parallel (The Smart Way) ---
+        // 'pokemonList' is just an array of names and URLs. We need to fetch each URL
+        // to get the images and types. Fetching them one-by-one is slow.
+        // Instead, we create an array of *Promises* and wait for all of them to finish.
+
+        const detailPromises = pokemonList.map((pokemon) => {
+          // For each Pokémon, we start fetching its detail URL.
+          // .then(res => res.json()) gets the JSON data from each response.
+          return fetch(pokemon.url).then((res) => res.json());
+        });
+
+        // Promise.all() waits for ALL the fetch promises in the array to resolve.
+        // 'pokemonDetails' will be an array of 20 full Pokémon objects.
+        const pokemonDetails = await Promise.all(detailPromises);
+
+        console.log("All Pokémon Details:", pokemonDetails);
+
+        // --- STEP 4: Clear the "Loading..." message ---
+        pokedexGrid.innerHTML = "";
+
+        // --- STEP 5: Loop and Create Cards ---
+        // Now we loop through our array of 20 detailed Pokémon objects.
+        pokemonDetails.forEach((pokemon) => {
+          // We use a helper function to keep our code clean.
+          const pokemonCard = createPokemonCard(pokemon);
+          pokedexGrid.appendChild(pokemonCard);
+        });
+      } catch (error) {
+        console.error("Could not fetch Pokémon:", error);
+        pokedexGrid.innerHTML = `<p class="error">Could not load Pokémon. ${error.message}</p>`;
+      }
+    }
+
+    // --- STEP 6: Create a Helper Function to build the card HTML ---
+    // This function takes one Pokémon object and returns an HTML element.
+    function createPokemonCard(pokemon) {
+      // 1. Create the main <article> element
+      const card = document.createElement("article");
+      card.className = "pokemon-card"; // Add the CSS class
+
+      // 2. Get the data we need
+      const id = pokemon.id;
+      const name = pokemon.name;
+      const imageUrl = pokemon.sprites.front_default;
+
+      // 3. Create the HTML for the Pokémon's types (this is a bit tricky)
+      // We loop over the 'types' array and create a <span> for each one.
+      const typesHtml = pokemon.types
+        .map((typeInfo) => {
+          const typeName = typeInfo.type.name;
+          // e.g., <span class="type type-grass">grass</span>
+          return `<span class="type type-${typeName}">${typeName}</span>`;
+        })
+        .join(""); // .join('') combines the array of strings into one string
+
+      // 4. Set the full HTML for the card
+      card.innerHTML = `
+        <div class="pokemon-image-container">
+            <img src="${imageUrl}" alt="${name}">
+        </div>
+        <div class="pokemon-info">
+            <span class="pokemon-id">#${id}</span>
+            <h3 class="pokemon-name">${name}</h3>
+            <div class="pokemon-types">
+                ${typesHtml}
+            </div>
+        </div>
+    `;
+
+      // 5. Return the finished card element
+      return card;
+    }
+
+    // --- STEP 7: Call the main function to start the app! ---
+    fetchPokemonList();
+  </script>
+</html>

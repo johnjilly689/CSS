@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Event Object Playground</title>
+    <style>
+      body {
+        font-family: Arial;
+        padding-bottom: 500px;
+      }
+      #coords {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: #eee;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      #parent {
+        padding: 40px;
+        background-color: lightblue;
+        margin-top: 20px;
+      }
+      #child {
+        padding: 20px;
+        background-color: crimson;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Event Object Playground</h1>
+    <p>Move your mouse, click the button, and try to submit the form.</p>
+
+    <div id="coords">
+      <b>Client:</b> <span id="client-coords"></span><br />
+      <b>Page:</b> <span id="page-coords"></span>
+    </div>
+
+    <form id="my-form">
+      <input type="text" placeholder="Try to submit" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="parent">
+      I am the Parent Div.
+      <button id="child">I am the Child Button</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. COORDINATE DEMO ---
+        const clientCoords = document.getElementById("client-coords");
+        const pageCoords = document.getElementById("page-coords");
+
+        // Listen for mouse movement on the whole page
+        document.addEventListener("mousemove", (e) => {
+          // Use clientX/Y for the viewport position
+          clientCoords.textContent = `X: ${e.clientX}, Y: ${e.clientY}`;
+          // Use pageX/Y for the full document position
+          pageCoords.textContent = `X: ${e.pageX}, Y: ${e.pageY}`;
+        });
+
+        // --- 2. preventDefault() DEMO ---
+        const myForm = document.getElementById("my-form");
+
+        myForm.addEventListener("submit", (e) => {
+          console.log("--- Form Submit Event ---");
+          // This is the magic line:
+          e.preventDefault();
+          console.log("Default form submission was PREVENTED!");
+        });
+
+        // --- 3. target vs currentTarget DEMO ---
+        const parent = document.getElementById("parent");
+        const child = document.getElementById("child");
+
+        // Add a listener to the PARENT
+        parent.addEventListener("click", (e) => {
+          console.log("--- PARENT Listener Fired ---");
+          console.log("e.target:", e.target); // Will be <button> or <div#parent>
+          console.log("e.currentTarget:", e.currentTarget); // Will ALWAYS be <div#parent>
+        });
+
+        // Add a listener to the CHILD
+        child.addEventListener("click", (e) => {
+          console.log("--- CHILD Listener Fired ---");
+          console.log("e.target:", e.target); // Will ALWAYS be <button>
+          console.log("e.currentTarget:", e.currentTarget); // Will ALWAYS be <button>
+
+          // --- 4. stopPropagation() DEMO ---
+          // Uncomment the line below, save, and click the button again.
+          // You'll see the "PARENT Listener Fired" message disappears!
+          // e.stopPropagation();
+          // console.log("Propagation was STOPPED!");
+        });
+      });
+    </script>
+  </body>
+</html>

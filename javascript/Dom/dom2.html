@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- lets learn to remove -->
+  </body>
+  <script>
+    let parent = document.createElement("div");
+    parent.innerHTML = "hello parent";
+    let child = document.createElement("div");
+    child.innerHTML = "hello child";
+    console.log(parent.children);
+    parent.appendChild(child);
+    console.log(parent.children);
+  </script>
+</html>

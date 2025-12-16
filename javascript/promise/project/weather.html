@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1>Weather Check</h1>
+      <div class="search-box">
+        <input type="text" id="cityInput" placeholder="Enter a city..." />
+        <button id="searchButton">Search</button>
+      </div>
+      <div id="weatherResult">
+        <p>Weather info will appear here.</p>
+      </div>
+    </div>
+
+    <script>
+      const cityInput = document.getElementById("cityInput");
+      const searchButton = document.getElementById("searchButton"); // Renamed variable
+      const weatherResultDiv = document.getElementById("weatherResult"); // Added this
+
+      // --- This is your API key. ---
+      // WARNING: Read the security note below!
+      const apiKey = "<api_key_here>";
+
+      // Renamed function to be more descriptive
+      const getWeather = async (cityName) => {
+        // Pass the city name as an argument
+        try {
+          // Use encodeURIComponent to handle city names with spaces (e.g., "New York")
+          const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(
+            cityName
+          )}`;
+
+          const response = await fetch(apiUrl); // Renamed variable
+
+          if (!response.ok) {
+            // Try to get the error message from the API response
+            const errorData = await response.json();
+            throw new Error(errorData.error.message);
+          }
+
+          const data = await response.json();
+          console.log(data); // Log the full data object
+
+          // --- Let's display the data in a much nicer way ---
+          const location = data.location;
+          const current = data.current;
+          const iconUrl = `https:${current.condition.icon}`;
+
+          weatherResultDiv.innerHTML = `
+            <div class="weather-info">
+              <h2>${location.name}, ${location.region}</h2>
+              <img src="${iconUrl}" alt="${current.condition.text}" style="width: 70px; height: 70px;">
+              <p style="font-size: 2rem; font-weight: 600; margin: 0;">${current.temp_c}°C</p>
+              <p>${current.condition.text}</p>
+              <p>Humidity: ${current.humidity}%</p>
+            </div>
+          `;
+        } catch (error) {
+          console.error(error.message);
+          // Display the error message to the user
+          weatherResultDiv.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+      };
+
+      searchButton.addEventListener("click", () => {
+        const cityInputValue = cityInput.value.trim();
+
+        if (cityInputValue) {
+          // We only call the function if the input is valid
+          getWeather(cityInputValue);
+        } else {
+          // Changed alert to a smoother UI message
+          weatherResultDiv.innerHTML = `<p class="error">Please enter a city name.</p>`;
+        }
+      });
+    </script>
+  </body>
+</html>

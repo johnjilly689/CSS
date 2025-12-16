@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color change project</title>
+  </head>
+  <body>
+    <h1>change the colour of background on start and stop on button</h1>
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+  </body>
+  <script>
+    const start = document.querySelector(".start");
+    const stop = document.querySelector(".stop");
+    // to change colour
+    //know the hexcode because colour are made of them
+    let interval;
+    start.addEventListener("click", () => {
+      interval = setInterval(() => {
+        let hex = "0123456789ABCDEF";
+        let has = "#";
+        for (let i = 0; i < 6; i++) {
+          has += hex[Math.floor(Math.random() * 16)];
+        }
+        console.log(has);
+        const show = document.createElement("div");
+        const text = document.querySelector("h1");
+        show.innerHTML = has;
+        text.appendChild(show);
+        document.body.style.backgroundColor = has;
+        // setInterval(() => {
+        //   text.removeChild(show);
+        // }, 1000);
+      }, 2000);
+    });
+
+    stop.addEventListener("click", () => {
+      clearInterval(interval);
+    });
+  </script>
+</html>

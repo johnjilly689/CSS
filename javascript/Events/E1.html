@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>EventListener Example</title>
+  </head>
+  <body>
+    <h1>Click the button!</h1>
+    <button id="hello-btn">Click Me</button>
+    <p id="message-area"></p>
+
+    <script>
+      // Wait for the HTML to load
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Select the elements
+        const button = document.getElementById("hello-btn");
+        const messageArea = document.getElementById("message-area");
+
+        // 2. Attach the listener
+        button.addEventListener("click", () => {
+          // 3. This is the code that runs *when* the click happens
+          messageArea.textContent = "You clicked the button! 🎉";
+        });
+      });
+    </script>
+  </body>
+</html>

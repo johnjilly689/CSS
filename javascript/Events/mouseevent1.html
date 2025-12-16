@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mouse event</title>
+  </head>
+  <body>
+    <h1>Mouse Events</h1>
+    <button id="btn1">Click Me</button>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let head = document.querySelector("h1");
+      let childhead = document.createElement("head-child");
+      let btn = document.getElementById("btn1");
+      //  below are mouse events
+      //   btn.addEventListener("mouseover", () => {
+      //     head.appendChild(childhead);
+      //     childhead.innerHTML = " mouse over event detected";
+      //   });
+      //   btn.addEventListener("mouseout", () => {
+      //     head.removeChild(childhead);
+      //   });
+
+      // below are keyboard events
+      btn.addEventListener("mousedown", () => {
+        head.appendChild(childhead);
+        childhead.innerHTML = " mouse down event detected";
+      });
+      btn.addEventListener("mouseup", () => {
+        head.removeChild(childhead);
+      });
+    });
+  </script>
+</html>

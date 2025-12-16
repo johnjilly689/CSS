@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Properties Example</title>
+    <style>
+      /* This style will be added with .classList */
+      .highlight {
+        background-color: #fffb85;
+        border: 1px solid #e6db3f;
+        padding: 10px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="main-heading">Hello, DOM!</h1>
+
+    <div id="content-area" class="container info-box">
+      <p>This is the first paragraph.</p>
+    </div>
+
+    <hr />
+
+    <h3>Input Area</h3>
+    <input type="text" id="my-input" placeholder="Type something here..." />
+    <button id="action-button">Click Me!</button>
+
+    <script>
+      // Wait for the DOM to be fully loaded before running our script
+      document.addEventListener("DOMContentLoaded", () => {
+        // === 1. Select all the elements we will work with ===
+        const heading = document.getElementById("main-heading");
+        const contentDiv = document.getElementById("content-area");
+        const input = document.getElementById("my-input");
+        const button = document.getElementById("action-button");
+
+        // === 2. Read some properties and log them to the console ===
+        console.log("Heading Element:", heading);
+        console.log("Heading ID:", heading.id); // -> "main-heading"
+        console.log("Content Div Classes:", contentDiv.className); // -> "container info-box"
+
+        // === 3. Add an event listener to the button to make changes ===
+        button.addEventListener("click", () => {
+          // --- .value (Read) ---
+          // Get the text from the input box
+          const inputValue = input.value;
+
+          // --- .innerHTML (Write) ---
+          // Change the heading. We use .innerHTML to make the <strong> tag work
+          // If the input is empty, just say "Clicked!"
+          if (inputValue) {
+            heading.innerHTML = `Hello, <strong>${inputValue}</strong>!`;
+          } else {
+            heading.innerHTML = "You Clicked the Button!";
+          }
+
+          // --- .textContent (Write) ---
+          // Change the text of the button itself.
+          // .textContent is safer and faster if you are *only* changing text.
+          button.textContent = "Done!";
+
+          // --- .classList (Modify) ---
+          // Add the .highlight class to our content div
+          contentDiv.classList.add("highlight");
+
+          // --- .style (Write) ---
+          // Change the heading's inline style
+          heading.style.color = "blue";
+          heading.style.textTransform = "uppercase";
+
+          // --- .disabled (Write) ---
+          // Disable the input and button after they are used
+          input.disabled = true;
+          button.disabled = true;
+
+          // --- .id (Write) ---
+          // Let's change the button's ID
+          console.log("Button ID before:", button.id);
+          button.id = "clicked-button";
+          console.log("Button ID after:", button.id);
+        });
+      });
+    </script>
+  </body>
+</html>

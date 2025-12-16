@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>setTimeout Example</title>
+  </head>
+  <body>
+    <h1>Watch the console (F12) to see the order!</h1>
+    <p id="status">Waiting for the timer...</p>
+
+    <script>
+      console.log("1. Hello! (Script starts)");
+
+      // This schedules the function for later
+      setTimeout(() => {
+        // This runs THIRD
+        console.log("2. I am the message from the timer!");
+        document.getElementById("status").textContent = "Timer finished! 🔥";
+      }, 2000); // Wait for 2 seconds
+
+      // This runs SECOND
+      console.log("3. Goodbye! (Script ends)");
+    </script>
+  </body>
+</html>

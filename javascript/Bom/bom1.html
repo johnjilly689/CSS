@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BOM Example</title>
+  </head>
+  <body>
+    <button onclick="showURL()">Show Current URL</button>
+
+    <script>
+      function showURL() {
+        // 'window.location.href' is a BOM property
+        // It accesses the URL from the browser window's location bar
+        // let currentURL = location.href;
+        let currentURL = window.screen.width;
+
+        // 'window.alert()' is also a BOM method
+        window.alert("The current URL is: " + currentURL);
+      }
+    </script>
+  </body>
+</html>

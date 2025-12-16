@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edibles & Groceries - ShopHub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="edibles">
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">🛍️ ShopHub</div>
+        <div class="search-wrapper">
+          <input type="text" placeholder="Search for products..." />
+        </div>
+        <div class="header-actions">
+          <button onclick="redirectToLogin()">👤 Login</button>
+          <button onclick="window.location.href='cart.html'">
+            🛒 Cart
+            <span
+              class="cart-badge"
+              style="
+                display: none;
+                background: red;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 50%;
+                font-size: 10px;
+                margin-left: 2px;
+              "
+              >0</span
+            >
+          </button>
+          <button>❤️ Wishlist</button>
+        </div>
+      </div>
+      <nav class="nav-bar">
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="clothing.html">Clothing</a>
+          <a href="edibles.html">Edibles & Groceries</a>
+          <a href="#">Electronics</a>
+          <a href="#">Home & Furniture</a>
+          <a href="#">Sports & Outdoors</a>
+          <a href="#">Help & Support</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Edibles & Groceries</span>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div
+      class="container"
+      style="display: grid; grid-template-columns: 250px 1fr; gap: 20px"
+    >
+      <!-- FILTERS -->
+      <div
+        class="filters-section"
+        style="height: fit-content; position: sticky; top: 100px"
+      >
+        <h3>Filters</h3>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-filter">
+            <input type="number" placeholder="Min" value="0" />
+            <span>-</span>
+            <input type="number" placeholder="Max" value="1000" />
+          </div>
+          <input
+            type="range"
+            class="price-range"
+            min="0"
+            max="1000"
+            value="1000"
+            onchange="filterProducts()"
+            style="width: 100%; margin-top: 10px"
+          />
+        </div>
+
+        <div class="filter-group">
+          <h4>Category</h4>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Dry Fruits & Nuts</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Cereals & Grains</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Organic Products</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Beverages</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Oils & Condiments</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Brand</h4>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Organic Gold</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Nature's Best</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>Premium Select</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Rating</h4>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>⭐⭐⭐⭐⭐ (5 Star)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>⭐⭐⭐⭐ (4 Star & up)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" />
+            <label>⭐⭐⭐ (3 Star & up)</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS SECTION -->
+      <section>
+        <h2>🥗 Edibles & Groceries</h2>
+        <p style="color: #666; margin-bottom: 20px">Showing 8 products</p>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About ShopHub</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Return Policy</a>
+        </div>
+        <div class="footer-section">
+          <h4>Policies</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Security</a>
+          <a href="#">Cookies</a>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ShopHub. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
